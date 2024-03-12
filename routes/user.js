@@ -19,7 +19,7 @@ const checkzod=(req,res,next)=>{
 router.post('/signup',async (req,res)=>{
     try{
     const{username,firstName,lastName,password,Email}=req.body;
-    console.log(password)
+    console.log(`this is the password ${password}`)
     const hash=await bcrypt.hash(password,saltRounds)
     const exist=await User.findOne({
         username:username
