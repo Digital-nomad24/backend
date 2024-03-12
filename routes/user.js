@@ -48,6 +48,7 @@ router.post('/signup',async (req,res)=>{
     })
     }
     catch(e){
+        console.log(e)
         res.json({Error:'dikkat h '})
     }
 })
