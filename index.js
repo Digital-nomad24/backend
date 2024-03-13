@@ -3,6 +3,7 @@ const express = require("express");
 const cors=require('cors')
 const jwt=require('jsonwebtoken')
 const app=express();
+const path=require('path')
 const userRoutes=require('./routes/user')
 const bankRoutes=require('./routes/bank')
 app.use(cors());
