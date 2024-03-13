@@ -11,13 +11,19 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/api/v1/user',userRoutes)
 app.use('/api/v1/account',bankRoutes)
-// app.use(express.static(path.join(__dirname, 'public')));
+if(process.env.NODE_ENV==="production")
+{
+    const __dirname=path.resolve();
 
-// // Define a catch-all route that serves index.html for all other routes
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
-
+    app.use(express.static(path.join(__dirname, '/frontend/dist')));
+    app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend',"dist", 'index.html'));
+});
+}
+else
+app.get('/',(req,res)=>{
+    res.send("API IS GOOD")
+})
 app.listen('3000',()=>{
     console.log("The port 3000 is live")
 })
