@@ -3,7 +3,6 @@ const express = require("express");
 const cors=require('cors')
 const jwt=require('jsonwebtoken')
 const app=express();
-const path=require('path')
 const userRoutes=require('./routes/user')
 const bankRoutes=require('./routes/bank')
 app.use(cors());
@@ -16,7 +15,7 @@ if(process.env.NODE_ENV==="production")
     const __dirname=path.resolve();
 
     app.use(express.static(path.join(__dirname, '/frontend/dist')));
-    app.get('*', (req, res) => {
+    app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend',"dist", 'index.html'));
 });
 }
