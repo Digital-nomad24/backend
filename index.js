@@ -5,6 +5,7 @@ const jwt=require('jsonwebtoken')
 const app=express();
 const userRoutes=require('./routes/user')
 const bankRoutes=require('./routes/bank')
+const path=require('path')
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
