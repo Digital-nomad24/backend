@@ -5,7 +5,7 @@ const userZod = z.object({
     firstName: z.string().min(1),
     lastName: z.string().min(1),
     password: z.string().min(1),
-    email: z.string().email().min(1)
+    Email: z.string().email().min(1)
 });
 const signinzod=z.object({
     email:z.string().email().min(1),
