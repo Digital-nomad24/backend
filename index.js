@@ -11,15 +11,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/api/v1/user',userRoutes)
 app.use('/api/v1/account',bankRoutes)
-
-
-
-//     app.use(express.static(path.join(__dirname, 'dist/index.html')));
-//     app.use('*', (req, res) => {
-//     res.sendFile(path.join(__dirname,"dist", 'index.html'));
-// });
-
-
 app.listen('3000',()=>{
     console.log("The port 3000 is live")
 })
