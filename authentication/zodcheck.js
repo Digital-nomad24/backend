@@ -7,8 +7,8 @@ const userZod = z.object({
     password: z.string().min(1),
     Email: z.string().email().min(1)
 });
-const signinzod=z.object({
-    email:z.string().email().min(1),
-    password: z.string().min(1)
-})
-module.exports = {userZod,signinzod};
+// const signinzod=z.object({
+//     email:z.string().email().min(1),
+//     password: z.string().min(1)
+// })
+module.exports = userZod;
