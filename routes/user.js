@@ -14,7 +14,9 @@ const checkzod=(req,res,next)=>{
         next()
     }
     else
-    console.log("error")
+    {
+        res.send({erro:"invalid data"})
+        console.log("error")}
 }
 const checkzod2=(req,res,next)=>{
     const result=signinzod.safeParse(req.body)
@@ -24,12 +26,13 @@ const checkzod2=(req,res,next)=>{
         next()
     }
     else
-    console.log("error")
+    {
+        res.send({erro:"invalid data"})
+        console.log("error")}
 }
 router.post('/signup',checkzod,async (req,res)=>{
     try{
     const{username,firstName,lastName,password,Email}=req.body;
-    console.log(`this is the password ${password}`)
     const hash=await bcrypt.hash(password,saltRounds)
     const exist=await User.findOne({
         username:username
@@ -59,38 +62,33 @@ router.post('/signup',checkzod,async (req,res)=>{
     })
     }
     catch(e){
-        console.log(e)
         res.json({Error:'dikkat h '})
     }
 })
-router.post('/signin',checkzod2 ,async (req,res)=>{
-    try{
-    const enteredEmail=req.body.Email
+router.post('/signin',async (req,res)=>{
+    // try{
+        const enteredEmail=req.body.Email
     const enteredPassword=req.body.password
     const find= await User.findOne(
        {
-        Email:enteredEmail,
+        Email:enteredEmail
        }
     )
     const hashedPasswordFromDatabase=find.password;
+    console.log(hashedPasswordFromDatabase)
     const verify=await bcrypt.compare(enteredPassword, hashedPasswordFromDatabase)
-    const token=jwt.sign({'Email':enteredEmail,'password':enteredPassword},`${jwt_secret}`)
-    if(find)
-    {
+    const token=jwt.sign({'userId':find._id,'password':enteredPassword},`${jwt_secret}`)
         if(verify==true)
         {
         res.json({
         Success:'Signed in',
         token:token})
-    }
+        }
     else
     res.json({message:"incorrect password"})
-    }
-    else
-    res.json({Error:'Incorrect'})
-}catch(e){
-    res.json({ErRRor:'dikkatt h bro'})
-}
+// }catch(e){
+//     res.json({ErRRor:'dikkatt h bro'})
+// }
 }
 )
 router.put('/update',checktoken,async (req,res)=>{
