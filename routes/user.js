@@ -66,8 +66,7 @@ router.post('/signup',checkzod,async (req,res)=>{
     }
 })
 router.post('/signin',async (req,res)=>{
-    // try{
-        const enteredEmail=req.body.Email
+    const enteredEmail=req.body.Email
     const enteredPassword=req.body.password
     const find= await User.findOne(
        {
@@ -78,17 +77,18 @@ router.post('/signin',async (req,res)=>{
     console.log(hashedPasswordFromDatabase)
     const verify=await bcrypt.compare(enteredPassword, hashedPasswordFromDatabase)
     const token=jwt.sign({'userId':find._id,'password':enteredPassword},`${jwt_secret}`)
-        if(verify==true)
+        if(find){if(verify==true)
         {
         res.json({
         Success:'Signed in',
         token:token})
         }
     else
-    res.json({message:"incorrect password"})
-// }catch(e){
-//     res.json({ErRRor:'dikkatt h bro'})
-// }
+    res.json({message:"incorrect password"})}
+else
+{
+    res.json({error:"invalid email"})
+}
 }
 )
 router.put('/update',checktoken,async (req,res)=>{
