@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-const userZod=require('../authentication/zodcheck')
+const {userZod,signinzod}=require('../authentication/zodcheck')
 const {User,Account}=require('../db/db')
 const {jwt_secret,saltRounds}=require('../config')
 const checktoken=require('../authentication/auth')
@@ -16,16 +16,16 @@ const checkzod=(req,res,next)=>{
     else
     console.log("error")
 }
-// const checkzod2=(req,res,next)=>{
-//     const result=signinzod.safeParse(req.body)
-//     console.log(result)
-//     if(result.success){
-//         console.log("zod verified")
-//         next()
-//     }
-//     else
-//     console.log("error")
-// }
+const checkzod2=(req,res,next)=>{
+    const result=signinzod.safeParse(req.body)
+    console.log(result)
+    if(result.success){
+        console.log("zod verified")
+        next()
+    }
+    else
+    console.log("error")
+}
 router.post('/signup',checkzod,async (req,res)=>{
     try{
     const{username,firstName,lastName,password,Email}=req.body;
@@ -63,7 +63,7 @@ router.post('/signup',checkzod,async (req,res)=>{
         res.json({Error:'dikkat h '})
     }
 })
-router.get('/signin',async (req,res)=>{
+router.get('/signin',checkzod2 ,async (req,res)=>{
     try{
     const enteredEmail=req.body.Email
     const enteredPassword=req.body.password
