@@ -65,7 +65,7 @@ router.post('/signup',checkzod,async (req,res)=>{
         res.json({Error:'dikkat h '})
     }
 })
-router.post('/signin',async (req,res)=>{
+router.post('/signin',checkzod2,async (req,res)=>{
     // try{
         const enteredEmail=req.body.Email
     const enteredPassword=req.body.password
