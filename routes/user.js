@@ -74,7 +74,7 @@ router.post('/signin',checkzod2 ,async (req,res)=>{
     )
     const hashedPasswordFromDatabase=find.password;
     const verify=await bcrypt.compare(enteredPassword, hashedPasswordFromDatabase)
-    const token=jwt.sign({'userId':naya._id,'password':password},`${jwt_secret}`)
+    const token=jwt.sign({'Email':enteredEmail,'password':enteredPassword},`${jwt_secret}`)
     if(find)
     {
         if(verify==true)
