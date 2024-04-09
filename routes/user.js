@@ -70,7 +70,6 @@ router.post('/signin',checkzod2 ,async (req,res)=>{
     const find= await User.findOne(
        {
         Email:enteredEmail,
-        password:enteredPassword
        }
     )
     const hashedPasswordFromDatabase=find.password;
