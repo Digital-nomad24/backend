@@ -6,33 +6,33 @@ const {jwt_secret,saltRounds}=require('../config')
 const checktoken=require('../authentication/auth')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
-// const checkzod=(req,res,next)=>{
-//     const result=userZod.safeParse(req.body)
-//     console.log(result)
-//     if(result.success){
-//         console.log("zod verified")
-//         next()
-//     }
-//     else
-//     {
-//         res.send({erro:"invalid data"})
-//         console.log("error")}
-// }
-// const checkzod2=(req,res,next)=>{
-//     const result=signinzod.safeParse(req.body)
-//     console.log(result)
-//     if(result.success){
-//         console.log("zod verified")
-//         next()
-//     }
-//     else
-//     {
-//         res.send({erro:"invalid data"})
-//         console.log("error")}
-// }
-router.post('/signup',async (req,res)=>{
-    try{
+const checkzod=(req,res,next)=>{
+    const result=userZod.safeParse(req.body)
+    console.log(result)
+    if(result.success){
+        console.log("zod verified")
+        next()
+    }
+    else
+    {
+        res.send({erro:"invalid data"})
+        console.log("error")}
+}
+const checkzod2=(req,res,next)=>{
+    const result=signinzod.safeParse(req.body)
+    console.log(result)
+    if(result.success){
+        console.log("zod verified")
+        next()
+    }
+    else
+    {
+        res.send({erro:"invalid data"})
+        console.log("error")}
+}
+router.post('/signup',checkzod,async (req,res)=>{
     const{username,firstName,lastName,password,Email}=req.body;
+    console.log(req.body);
     const hash=await bcrypt.hash(password,saltRounds)
     const exist=await User.findOne({
         username:username
@@ -53,6 +53,7 @@ router.post('/signup',async (req,res)=>{
         Email:Email,
         Account:newaccount._id
     })
+    console.log(newuser)
     const token=jwt.sign({'userId':newuser._id,'password':password},`${jwt_secret}`)
     await newuser.save();
     await newaccount.save()
@@ -61,10 +62,7 @@ router.post('/signup',async (req,res)=>{
         token:token
     })
     }
-    catch(e){
-        res.json({Error:'dikkat h '})
-    }
-})
+)
 router.post('/signin',async (req,res)=>{
     const enteredEmail=req.body.Email
     const enteredPassword=req.body.password
