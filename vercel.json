@@ -1,21 +1,22 @@
 {
-    "version":2,
-    "builds": [
-        {
-            "src":"index.js",
-            "use":"@vercel/node"
-        }
-    ],
-    "rewrites":[
-            {"source": "/(.*)", "destination": "/"}
-     ],
-     "routes": [
+  "version": 2,
+  "builds": [
     {
-      "src": "/api/(.*)",
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://backend-one-pied.vercel.app/api/$1",
       "headers": {
         "Access-Control-Allow-Origin": "*"
-      },
-      "dest": "/api/$1"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
-      }
+}
