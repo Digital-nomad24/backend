@@ -22,4 +22,4 @@ const bankSchema={
     balance:Number
 }
 const Account=mongoose.model('Account',bankSchema)
-module.exports={User,Account}
+module.exports={User,Account};
