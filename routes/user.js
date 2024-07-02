@@ -111,27 +111,6 @@ router.put('/update',checktoken,async (req,res)=>{
     console.log("error"+e)
 }
 })
-router.delete('/delete',checktoken,async (req,res)=>{
-    try{
-    const{username,firstName,password}=req.body;
-    const {token}=req.headers
-    const find= await User.findOne({
-        username:username,
-        password:password
-    })
-    if(find)
-    {
-        if(find.token===token)
-        {
-            await User.deleteOne({username:username,firstName:firstName})
-            res.json({success:'deleted successfully'})
-    }
-    else
-    res.json({Error:'Incorrect'})}
-}catch(e){
-    console.log("error"+e)
-}
-})
 router.get('/filter',async (req,res)=>{
     const param=req.query.filter;
     const find= await User.find({
