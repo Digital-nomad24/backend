@@ -6,14 +6,14 @@ const app=express();
 const userRoutes=require('./routes/user')
 const bankRoutes=require('./routes/bank')
 const path=require('path')
-const corsOptions = {
-    origin: 'https://example.com', // Replace with your allowed origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-  };
+// const corsOptions = {
+//     origin: 'https://example.com', // Replace with your allowed origin
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     credentials: true
+//   };
   
-  app.use(cors(corsOptions));
+  app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/api/v1/user',userRoutes)
