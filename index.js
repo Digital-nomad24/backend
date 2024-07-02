@@ -6,13 +6,24 @@ const app=express();
 const userRoutes=require('./routes/user')
 const bankRoutes=require('./routes/bank')
 const path=require('path')
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://frontend-seven-gamma-86.vercel.app'
+];
+
 const corsOptions = {
-    origin: 'https://frontend-seven-gamma-86.vercel.app', // Your front-end URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true // if you need to include cookies or HTTP authentication
-  };
-  app.use(cors(corsOptions))
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/api/v1/user',userRoutes)

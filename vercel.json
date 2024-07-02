@@ -8,14 +8,5 @@
     ],
     "rewrites":[
             {"source": "/(.*)", "destination": "/"}
-     ],
-     "routes": [
-        {
-            "src": "/api/v1/(.*)",
-            "headers": {
-              "Access-Control-Allow-Origin": "*"
-            },
-            "dest": "/api/v1/$1"
-          }
-        ]
+     ]
       }
