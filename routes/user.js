@@ -15,8 +15,9 @@ const checkzod=(req,res,next)=>{
     }
     else
     {
+        console.log("error")
         res.send({erro:"invalid data"})
-        console.log("error")}
+        }
 }
 const checkzod2=(req,res,next)=>{
     const result=signinzod.safeParse(req.body)
