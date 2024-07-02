@@ -6,31 +6,31 @@ const {jwt_secret,saltRounds}=require('../config')
 const checktoken=require('../authentication/auth')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
-const checkzod=(req,res,next)=>{
-    const result=userZod.safeParse(req.body)
-    console.log(result)
-    if(result.success){
-        console.log("zod verified")
-        next()
-    }
-    else
-    {
-        res.send({erro:"invalid data"})
-        console.log("error")}
-}
-const checkzod2=(req,res,next)=>{
-    const result=signinzod.safeParse(req.body)
-    console.log(result)
-    if(result.success){
-        console.log("zod verified")
-        next()
-    }
-    else
-    {
-        res.send({erro:"invalid data"})
-        console.log("error")}
-}
-router.post('/signup',checkzod,async (req,res)=>{
+// const checkzod=(req,res,next)=>{
+//     const result=userZod.safeParse(req.body)
+//     console.log(result)
+//     if(result.success){
+//         console.log("zod verified")
+//         next()
+//     }
+//     else
+//     {
+//         res.send({erro:"invalid data"})
+//         console.log("error")}
+// }
+// const checkzod2=(req,res,next)=>{
+//     const result=signinzod.safeParse(req.body)
+//     console.log(result)
+//     if(result.success){
+//         console.log("zod verified")
+//         next()
+//     }
+//     else
+//     {
+//         res.send({erro:"invalid data"})
+//         console.log("error")}
+// }
+router.post('/signup',async (req,res)=>{
     try{
     const{username,firstName,lastName,password,Email}=req.body;
     const hash=await bcrypt.hash(password,saltRounds)
