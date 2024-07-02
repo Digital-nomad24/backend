@@ -23,15 +23,4 @@ const bankSchema={
     balance:Number
 }
 const Account=mongoose.model('Account',bankSchema)
-userSchema.post('findOneAndDelete',async function(doc){
-    // console.log("HO GYA DELETE")
-    if(doc)
-    {
-        await Account.deleteMany({
-            _id:{
-                $in: doc.reviews
-            }
-        })
-    }
-})
 module.exports={User,Account};
