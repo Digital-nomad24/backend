@@ -9,7 +9,8 @@ const path=require('path')
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://frontend-seven-gamma-86.vercel.app'
+  'https://frontend-seven-gamma-86.vercel.app',
+  "https://paymentgateway-5px5762bc-nakshatra-vashisths-projects.vercel.app/"
 ];
 
 const corsOptions = {
