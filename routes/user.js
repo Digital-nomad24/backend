@@ -81,7 +81,7 @@ router.post('/signin',async (req,res)=>{
         res.json({
         Success:'Signed in',
         token:token,
-        username:find.username
+        firstName:find.firstName
     })
         }
     else
