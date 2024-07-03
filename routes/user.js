@@ -80,7 +80,9 @@ router.post('/signin',async (req,res)=>{
         {
         res.json({
         Success:'Signed in',
-        token:token})
+        token:token,
+        username:find.username
+    })
         }
     else
     res.json({message:"incorrect password"})}
